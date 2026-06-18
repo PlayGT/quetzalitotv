@@ -1,0 +1,41 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="referrer" content="origin">
+        <title>JJFUTBOL.LAT PLAYER</title>
+        <link crossorigin='anonymous' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css' rel='stylesheet'/>
+        <style>
+            body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; position: relative; background:#000;}
+            #iframeContainer { position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; z-index: 1; }
+            .loading-spinner { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999; border: 4px solid #f3f3f3; border-radius: 50%; border-top: 4px solid #6366f1; width: 50px; height: 50px; animation: spin 2s linear infinite; }
+            @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+            #flag-button { position: absolute; top: 15px; right: 20px; background: rgba(0,0,0,0.5); border: none; color: white; font-size: 28px; cursor: pointer; z-index: 9999; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); transition: 0.3s; }
+            #flag-button:hover { background: #6366f1; transform: scale(1.1); }
+            [class*="banner"], [id*="banner"], [class*="ad"], .ad-container, ins.adsbygoogle, .video-ad { display: none !important; opacity: 0 !important; pointer-events: none !important; }
+        </style>
+
+    </head>
+    <body>
+    <div class="loading-spinner"></div>
+    <button id="flag-button"><i class="fa-brands fa-chromecast"></i></button>
+
+    <iframe allowfullscreen="true" frameborder="0" id="iframeContainer" src="" sandbox="allow-same-origin allow-scripts allow-forms allow-presentation" allow="autoplay; fullscreen; encrypted-media; picture-in-picture"></iframe>
+
+    <script>
+        // URL del stream codificada en Base64 (decodificación 100% en cliente, sin backend)
+        var PLAYER_B64 = "aHR0cHM6Ly9zdWRhbWVyaWNhcGxheTIuY29tL2NhbmFsXzgxMTIvMWR6cG9ydHNwbHVzLmh0bWw=";
+        try {
+            var decodedUrl = decodeURIComponent(escape(atob(PLAYER_B64)));
+            document.getElementById('iframeContainer').src = decodedUrl;
+        } catch (e) {
+            console.error("Error decodificando el enlace base64:", e);
+        }
+    </script>
+
+
+
+    </body>
+    </html>
+    
