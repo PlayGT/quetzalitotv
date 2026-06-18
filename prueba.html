@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>LA18 HD - Reproductor</title>
+  <script src="https://cdn.jsdelivr.net/npm/dashjs@4/dist/dash.all.min.js"></script>
+  <style>
+    body { margin:0; background:#000; overflow:hidden; font-family:Arial; }
+    #videoContainer { width:100vw; height:100vh; }
+    video { width:100%; height:100%; }
+    .controls { position:absolute; bottom:10px; left:10px; color:white; background:rgba(0,0,0,0.5); padding:5px 10px; border-radius:5px; }
+  </style>
+</head>
+<body>
+  <div id="videoContainer">
+    <video id="video" controls autoplay></video>
+  </div>
+
+  <script>
+    const manifestUrl = "https://dmbgaz4xf6jyh.cloudfront.net/live-stream-dai/69690cfcce0dc031830e7c1a/c1464dd58d504cd2a3095a1e13adc28c/d97743de3620a865848fff7a9de14dda1bf2409d/session/839eef1d-9b54-4722-ae66-f26c843e156e/manifest.mpd?player=698d025b1e7558eea117b4dd&access_token=YBWrgGj7ch2sF2aNnUCPeWNUwYVhSOcL9sDJM7msXnnRNzpDYysXLdb02PPhnOHoTGpiKFDbOnt&uid=8sd3WIQO8unRQwNa1Y1kA72UuPHcAlui&sid=QvundnY4fcIp37ABZUDO9f7omeMimo1N&pid=GrTyoaChQH26EsX8QfF7PSskk2qmbfYU&ref=ditu.caracoltv.com&ext_pb=0&es=dmbgaz4xf6jyh.cloudfront.net&proto=https&pz=us&xr=us-east-2&manifestfilter=video_height:480-1080";
+
+    const video = document.getElementById("video");
+    const player = dashjs.MediaPlayer().create();
+    
+    player.initialize(video, manifestUrl, true);
+    
+    // Intenta manejar DRM automáticamente (Widevine)
+    player.attachView(video);
+    player.setProtectionData({
+      "com.widevine.alpha": {
+        serverURL: ""  // El player intentará detectarlo del manifest
+      }
+    });
+  </script>
+</body>
+</html>
